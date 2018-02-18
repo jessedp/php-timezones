@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "jessedp\\php-timezones\\": "src/jessedp/php-timezones"
+            "jessedp\\Timezones\\": "src/Timezones/"
         }
     },
     "minimum-stability": "stable"
