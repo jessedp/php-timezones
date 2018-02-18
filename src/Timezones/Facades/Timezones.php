@@ -1,6 +1,6 @@
-<?php namespace
+<?php
 
-jessedp\Timezones\Facades;
+namespace jessedp\Timezones\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

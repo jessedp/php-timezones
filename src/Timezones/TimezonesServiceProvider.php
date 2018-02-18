@@ -1,10 +1,11 @@
-<?php namespace jessedp\Timezones;
+<?php
+namespace jessedp\Timezones;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * TimezonelistServiceProvider
+ * TimezonesServiceProvider
  *
  * @package jessedp\Timezones
  * @author jessep <jessedp@gmail.com>
@@ -41,7 +42,7 @@ class TimezonesServiceProvider extends ServiceProvider
 
         $this->app->booting(function () {
             $loader = AliasLoader::getInstance();
-            $loader->alias('Timezones', 'jessedp\Timeszones\Facades\Timezones');
+            $loader->alias('Timezones', 'jessedp\Timezones\Facades\Timezones');
         });
     }
 

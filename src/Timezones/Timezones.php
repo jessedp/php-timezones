@@ -1,12 +1,12 @@
 <?php
 
-//namespace jessedp\Timezones;
+namespace jessedp\Timezones;
 
 use DateTime;
 use DateTimeZone;
 
 /**
- * The Timezones facade.
+ * The Timezones class.
  *
  * @package jessedp\Timezones
  * @author jessedp <jessedp@gmail.com>
