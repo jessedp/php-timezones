@@ -36,7 +36,7 @@ $ composer update
 ...
 'providers' => array(
     ...
-    jessedp\timezones\TimezonesProvider::class,
+    jessedp\php-timezones\TimezonesServiceProvider::class,
 ),
 ```
 
@@ -44,11 +44,11 @@ $ composer update
 
 ###### 1. Render a timezone listbox
 
-To do so, use method `Timezonelist::create($name)`.
+To do so, use method `Timezones::create($name)`.
 
 Example:
 ```php
-Timezonelist::create('timezone');
+Timezones::create('timezone');
 ```
 
 This will output the following:
@@ -501,7 +501,7 @@ This will output the following:
 
 Method `Timezones::create()` have three parameters:
 ```php
-Timezonelist::create($name, $selected, $attr);
+Timezones::create($name, $selected, $attr);
 ```
 - The first parameter is required, but the second and third is optional.
 
@@ -509,28 +509,28 @@ Timezonelist::create($name, $selected, $attr);
 
 Example:
 ```php
-Timezonelist::create('timezone', 'Asia/Ho_Chi_Minh');
+Timezones::create('timezone', 'Asia/Ho_Chi_Minh');
 ```
 
 - The third parameter use to set HTML attribute of select tag.
 
 Example:
 ```php
-Timezonelist::create('timezone', null, 'class="styled"');
+Timezones::create('timezone', null, 'class="styled"');
 ```
 
 You can also add multiple attribute.
 
 Example:
 ```php
-Timezonelist::create('timezone', null, 'id="timezone" class="styled"');
+Timezones::create('timezone', null, 'id="timezone" class="styled"');
 ```
 
 Or you can also add multiple attribute with one array.
 
 Example:
 ```php
-Timezonelist::create('timezone', null, [
+Timezones::create('timezone', null, [
     'id'    => 'timezone',
     'class' => 'styled',
     ...
@@ -539,11 +539,11 @@ Timezonelist::create('timezone', null, [
 
 ###### 2. Render a timezone array
 
-You can also render timezone list as an array. To do so, just use method `Timezonelist::toArray()`.
+You can also render timezone list as an array. To do so, just use the `Timezones::toArray()` method.
 
 Example in Laravel:
 ```php
-$timezone_list = Timezonelist::toArray();
+$timezone_list = Timezones::toArray();
 ```
 
 # Thanks for use
