@@ -9,3 +9,4 @@ Homestead.yaml
 composer.phar
 composer.lock
 .php_cs.cache
+*.iml
