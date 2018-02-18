@@ -1,0 +1,22 @@
+{
+    "name": "jessedp/php-timezones",
+    "description": "Basic Timezone utilities aimed at Laravel",
+    "keywords": ["timezone", "timezones", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jessedp",
+            "email": "jessedp@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "jessedp\\php-timezones\\": "src/jessedp/php-timezones"
+        }
+    },
+    "minimum-stability": "stable"
+}
