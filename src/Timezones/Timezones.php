@@ -57,16 +57,16 @@ class Timezones
     protected function formatTimezone($timezone, $region)
     {
         $time = new DateTime(null, new DateTimeZone($timezone));
-        $int_offset = $time->format('P');
-        $offset = str_replace('-', ' &minus; ', $int_offset);
-        $offset = str_replace('+', ' &plus; ', $int_offset);
+        $str_offset = $time->format('P');
+        $offset = str_replace('-', ' &minus; ', $str_offset);
+        $offset = str_replace('+', ' &plus; ', $str_offset);
 
         $timezone = substr($timezone, strlen($region) + 1);
         $timezone = str_replace('St_', 'St. ', $timezone);
         $timezone = str_replace('_', ' ', $timezone);
 
         $formatted = '(GMT/UTC' . $offset . ')' . self::WHITESPACE_SEP . $timezone;
-        return ['offset'=>$int_offset, 'label' => $formatted];
+        return ['offset'=>$str_offset, 'label' => $formatted];
     }
 
     /**
@@ -118,12 +118,15 @@ class Timezones
                 $opt = $this->formatTimezone($timezone, $continent);
                 $opt['tz'] = $timezone;
                 $opt['selected'] = ($selected == $timezone) ? ' selected="selected"' : '';
+                $opts[] = $opt;
             }
+
             array_multisort(array_column($opts, 'offset'), SORT_ASC,
                             array_column($opts, 'label'), SORT_ASC,
                             $opts);
+
             foreach($opts as $opt){
-                $listbox .= '<option value="' . $opt['timezone'] . '"' . $opt['selected'] . '>';
+                $listbox .= '<option value="' . $opt['tz'] . '"' . $opt['selected'] . '>';
                 $listbox .= $opt['label'];
                 $listbox .= '</option>';
             }
