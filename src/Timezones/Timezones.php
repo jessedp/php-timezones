@@ -87,7 +87,9 @@ class Timezones
      * @param array $opts various options to set, including:
      *      @subparam array $attr key=>value pairs of attributes to apply to the select element
      *      @subparam bool $with_regions whether or not to do region grouping (default=false)
-     * @return string
+     *      @subparam array $regions the regions to include, one or more of: Africa, America, Antarctica,
+*                                    Arctic, Asia, Atlantic, Australia, Europe, Indian, Pacific
+ * @return string
      **/
     public function create($name, $selected='UTC', $opts=[])
     {
@@ -112,21 +114,21 @@ class Timezones
             $with_regions = true;
         }
 
+        $limit_regions = [];
+        //setup specfic regions - could be better and validate them here too, but, eh...
+        if(isset($opts['regions']) && is_array($opts['regions']) && !empty($opts['regions'])){
+            $limit_regions = $opts['regions'];
+        }
+
         // start select element
         $listbox = '<select name="' .$name. '"' .$attrSet. '>';
 
         if ($with_regions) {
-            // Add popular timezones
-            $listbox .= '<optgroup label="General">';
-            foreach ($this->popularTimezones as $key => $value) {
-                $selected_attr = ($selected == $key) ? ' selected="selected"' : '';
-                $listbox .= '<option value="' . $key . '" ' . $selected_attr . '>' . $value . '</option>';
-            }
-            $listbox .= '</optgroup>';
-        }
-
-        if ($with_regions){
             $regions = $this->regions;
+        } elseif(!empty($limit_regions)){
+            foreach($limit_regions as $region){
+                $regions[$region] = $this->regions[$region];
+            }
         } else {
             $regions = ['All'=>DateTimeZone::ALL];
         }
