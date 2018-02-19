@@ -83,15 +83,19 @@ class Timezones
      * Create a timezone HTML select element for form
      *
      * @param string $name the name/id to be used for the element
-     * @param string $selected
+     * @param string $selected selected option, defaults to UTC
      * @param array $opts various options to set, including:
      *      @subparam array $attr key=>value pairs of attributes to apply to the select element
      *      @subparam bool $with_regions whether or not to do region grouping (default=false)
      * @return string
      **/
-    public function create($name, $selected='', $opts=[])
+    public function create($name, $selected='UTC', $opts=[])
     {
-        
+        //handle a null selected
+        if (empty($selected)) {
+            $selected = 'UTC';
+        }
+
         // Attributes for select element
         $attrSet = '';
         if (isset($opts['attr']) && is_array($opts['attr']) && !empty($opts['attr'])){
