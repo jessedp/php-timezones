@@ -212,7 +212,7 @@ class Timezones
      *
      * @return string
      */
-    public function convertFromUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s (e)')
+    public function convertFromUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s')
     {
         $date = new DateTime($timestamp, new DateTimeZone('UTC'));
 
@@ -233,7 +233,7 @@ class Timezones
      *
      * @return string
      */
-    public function convertToUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s (e)')
+    public function convertToUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s')
     {
         $list = DateTimeZone::listIdentifiers();
         if (!in_array($timezone, $list)) {
