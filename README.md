@@ -1,5 +1,5 @@
 ## About
-A wrapper to enumerate PHP 5.4+, 7+ timezones in a simplified way for use in various ways.
+A wrapper to enumerate PHP 5.6+, 7+ timezones in a simplified way for use in various ways.
 
 This is done with Laravel 5.x in mind, but may work elsewhere. YMMV elsewhere.   
 
@@ -82,17 +82,14 @@ Timezones::create('timezone', 'Asia/Ho_Chi_Minh');
 
 ###### "Options" Example:
 You may also add multiple attributes with an array.
-```php
 
-
-Example:
 ```php
 Timezones::create('timezone', null, 
             ['attr'=>[
-                'id'    => 'my_id',
-                'class' => 'form-control'
-                ]
-            ]);
+             'id'    => 'my_id',
+             'class' => 'form-control'
+            ]
+        ]);
 ```
 
 Which gives us:
