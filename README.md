@@ -1,4 +1,4 @@
-## About php-timezone
+## About php-timezones
 [![Build Status](https://api.travis-ci.org/jessedp/php-timezones.svg?branch=master)](https://travis-ci.org/jessedp/php-timezones)
 
 A wrapper to enumerate PHP 5.6+, 7+ timezones in a simplified way for use in various ways.
