@@ -1,7 +1,7 @@
 <?php
 namespace jessedp\Timezones;
 
-use Illuminate\Foundation\AliasLoader;
+
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -12,13 +12,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class TimezonesServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
     /**
      * Bootstrap the application events.
      *
@@ -36,14 +29,19 @@ class TimezonesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('timezones', function ($app) {
+        
+        // $this->app->singleton('timezones', function ($app) {
+        //     return new Timezones;
+        // });
+
+        $this->app->bind(Timezones::class,  function () {
             return new Timezones;
+            // $loader = AliasLoader::getInstance();
+            // $loader->alias('Timezones', 'jessedp\Timezones\Facades\Timezones');
         });
 
-        $this->app->booting(function () {
-            $loader = AliasLoader::getInstance();
-            $loader->alias('Timezones', 'jessedp\Timezones\Facades\Timezones');
-        });
+        $this->app->alias(Timezones::class, 'timezones');
+
     }
 
     /**
