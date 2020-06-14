@@ -67,7 +67,7 @@ class Timezones
         $dbl_offset = (float) str_replace(':', '.', $str_offset);
 
         //only strip things if we're bothering with regions
-        if (! empty($region)) {
+        if (!empty($region)) {
             $timezone = substr($timezone, strlen($region) + 1);
         }
 
@@ -100,7 +100,7 @@ class Timezones
 
         // Attributes for select element
         $attrSet = '';
-        if (isset($opts['attr']) && is_array($opts['attr']) && ! empty($opts['attr'])) {
+        if (isset($opts['attr']) && is_array($opts['attr']) && !empty($opts['attr'])) {
             $attr = $opts['attr'];
 
             foreach ($attr as $attr_name => $attr_value) {
@@ -116,7 +116,7 @@ class Timezones
 
         $limit_regions = [];
         //setup specfic regions - could be better and validate them here too, but, eh...
-        if (isset($opts['regions']) && is_array($opts['regions']) && ! empty($opts['regions'])) {
+        if (isset($opts['regions']) && is_array($opts['regions']) && !empty($opts['regions'])) {
             $limit_regions = $opts['regions'];
         }
 
@@ -126,7 +126,7 @@ class Timezones
         $regions = [];
         if ($with_regions) {
             $regions = self::$regions;
-        } elseif (! empty($limit_regions)) {
+        } elseif (!empty($limit_regions)) {
             foreach ($limit_regions as $region) {
                 $regions[$region] = self::$regions[$region];
             }
@@ -217,7 +217,7 @@ class Timezones
         $date = new DateTime($timestamp, new DateTimeZone('UTC'));
 
         $list = DateTimeZone::listIdentifiers();
-        if (! in_array($timezone, $list)) {
+        if (!in_array($timezone, $list)) {
             $timezone = 'UTC';
         }
         $date->setTimezone(new DateTimeZone($timezone));
@@ -236,7 +236,7 @@ class Timezones
     public static function convertToUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s')
     {
         $list = DateTimeZone::listIdentifiers();
-        if (! in_array($timezone, $list)) {
+        if (!in_array($timezone, $list)) {
             $timezone = 'UTC';
         }
 
