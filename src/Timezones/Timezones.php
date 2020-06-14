@@ -123,6 +123,7 @@ class Timezones
         // start select element
         $listbox = '<select name="'.$name.'"'.$attrSet.'>';
 
+        $regions = [];
         if ($with_regions) {
             $regions = self::$regions;
         } elseif (! empty($limit_regions)) {
