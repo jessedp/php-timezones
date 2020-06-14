@@ -194,7 +194,7 @@ class Timezones
         }
 
         // Add all timezone of the regions to return
-        foreach ($this->continents as $continent => $mask) {
+        foreach ($this->regions as $continent => $mask) {
             $timezones = DateTimeZone::listIdentifiers($mask);
             foreach ($timezones as $timezone) {
                 $list[$continent][$timezone] = $this->formatTimezone($timezone, $continent);
