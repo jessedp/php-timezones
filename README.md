@@ -54,7 +54,7 @@ Timezones::create($name, $selected, $opts);
 #### Basic Example
 
 ``` php
-Timezones::create('timezone');
+Timezones::create('timezone'); 
 ```
 
 Returns a string similar to:
