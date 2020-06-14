@@ -4,7 +4,6 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Test Status](https://img.shields.io/github/workflow/status/jessedp/php-timezones/run-tests?label=tests&style=flat-square)](https://github.com/jessedp/php-timezones/actions?query=workflow%3Arun-tests)
 [![Quality Score](https://img.shields.io/scrutinizer/g/jessedp/php-timezones.svg?style=flat-square)](https://scrutinizer-ci.com/g/jessedp/php-timezones)
-[![StyleCI](https://styleci.io/repos/121977341/shield)](https://styleci.io/repos/121977341)
 [![Total Downloads](https://img.shields.io/packagist/dt/jessedp/php-timezones.svg?style=flat-square)](https://packagist.org/packages/jessedp/php-timezones)
 
 A wrapper to enumerate PHP 5.6+, 7.x timezones in a simplified way for use in various ways.
