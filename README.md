@@ -1,6 +1,11 @@
 # php-timezones
 
-[![Build Status](https://api.travis-ci.org/jessedp/php-timezones.svg?branch=master)](https://travis-ci.org/jessedp/php-timezones)
+[![Latest Version](https://img.shields.io/github/release/jessedp/php-timezones.svg?style=flat-square)](https://github.com/jessedp/php-timezones/releases)
+[![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Test Status](https://img.shields.io/github/workflow/status/jessedp/php-timezones/run-tests?label=tests&style=flat-square)](https://github.com/jessedp/php-timezones/actions?query=workflow%3Arun-tests)
+[![Quality Score](https://img.shields.io/scrutinizer/g/jessedp/php-timezones.svg?style=flat-square)](https://scrutinizer-ci.com/g/jessedp/php-timezones)
+[![StyleCI](https://styleci.io/repos/121977341/shield)](https://styleci.io/repos/121977341)
+[![Total Downloads](https://img.shields.io/packagist/dt/jessedp/php-timezones.svg?style=flat-square)](https://packagist.org/packages/jessedp/php-timezones)
 
 A wrapper to enumerate PHP 5.6+, 7.x timezones in a simplified way for use in various ways.
 
@@ -8,20 +13,20 @@ This is done with Laravel 5.5+ in mind - YMMV elsewhere.
 
 ## Basics
 
-- Creates timezone arrays based on PHP's supported timezones with optional grouping by region
-- Lists are sorted by offset from high (+14:00) to low (-11:00)  
-- Optionally group the arrays (multi-dim associated array) by region
-  - sorting is the same, but only inside each region
-- For either case, return those as:
-  - php arrays for whatever use your heart desires
-  - HTML select list  
-- 2 utility functions for converting to/from UTC
+* Creates timezone arrays based on PHP's supported timezones with optional grouping by region
+* Lists are sorted by offset from high (+14:00) to low (-11:00)  
+* Optionally group the arrays (multi-dim associated array) by region
+  + sorting is the same, but only inside each region
+* For either case, return those as:
+  + php arrays for whatever use your heart desires
+  + HTML select list  
+* 2 utility functions for converting to/from UTC
 
 ## Installation
 
 You can install this package using [Composer](https://getcomposer.org).
 
-```bash
+``` bash
 $ composer require jessedp/php-timezones
 
 Using version ^0.2.0 for jessedp/php-timezones
@@ -36,30 +41,30 @@ Using version ^0.2.0 for jessedp/php-timezones
 
 The method `Timezones::create()` has three parameters:
 
-```php
+``` php
 Timezones::create($name, $selected, $opts);
 ```
 
-- $name **required** - the *name* of the select element
-- $selected - sets the selected value of list box, assuming the a value with the option exists
-- $opts an array of options as key=>value:
-  - attr => *array* of key=>value pairs to be included in the select element (ie, 'id', 'class', etc.)
-  - with_regions => *boolean* whether or not to use option groups for the regions/continents (defaults to false)
-  - regions => array (of strings) specifying the region(s) to include
+* $name **required** - the *name* of the select element
+* $selected - sets the selected value of list box, assuming the a value with the option exists
+* $opts an array of options as key=>value:
+  + attr => *array* of key=>value pairs to be included in the select element (ie, 'id', 'class', etc.)
+  + with_regions => *boolean* whether or not to use option groups for the regions/continents (defaults to false)
+  + regions => array (of strings) specifying the region(s) to include
 
 #### Basic Example
 
-```php
+``` php
 Timezones::create('timezone');
 ```
 
 Returns a string similar to:
 
-```html
+``` html
     <select name="timezone">
         ...
-            <option value="Africa/Abidjan">(GMT/UTC + 00:00) Abidjan</option>
-            <option value="Africa/Accra">(GMT/UTC + 00:00) Accra</option>
+        <option value="Africa/Abidjan">(GMT/UTC + 00:00) Abidjan</option>
+        <option value="Africa/Accra">(GMT/UTC + 00:00) Accra</option>
         ...
 
     </select>
@@ -69,7 +74,7 @@ Returns a string similar to:
 
 Same as above, but *Asia/Ho_Chi_Minh* will be selected by default
 
-```php
+``` php
 Timezones::create('timezone', 'Asia/Ho_Chi_Minh');
 ```
 
@@ -77,7 +82,7 @@ Timezones::create('timezone', 'Asia/Ho_Chi_Minh');
 
 You may also add multiple attributes with an array.
 
-```php
+``` php
 Timezones::create('timezone', null,
             ['attr'=>[
              'id'    => 'my_id',
@@ -88,15 +93,17 @@ Timezones::create('timezone', null,
 
 Which gives us:
 
-```html
+``` html
     <select name="timezone" id="my_id" class="form-control">
-    <option value="Pacific/Apia">(GMT/UTC + 14:00)&nbsp;&nbsp;&nbsp;&nbsp;Pacific/Apia</option><option value="Pacific/Kiritimati">(GMT/UTC + 14:00)&nbsp;&nbsp;&nbsp;&nbsp;Pacific/Kiritimati</option>
-    ...
-    <option value="Asia/Shanghai">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Shanghai</option><option value="Asia/Singapore">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Singapore</option>
-    <option value="Asia/Taipei">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Taipei</option>
-    ...
-    <option value="America/New_York">(GMT/UTC − 05:00)&nbsp;&nbsp;&nbsp;&nbsp;America/New York</option>
-    ...
+        <option value="Pacific/Apia">(GMT/UTC + 14:00)&nbsp;&nbsp;&nbsp;&nbsp;Pacific/Apia</option>
+        <option value="Pacific/Kiritimati">(GMT/UTC + 14:00)&nbsp;&nbsp;&nbsp;&nbsp;Pacific/Kiritimati</option>
+        ...
+        <option value="Asia/Shanghai">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Shanghai</option>
+        <option value="Asia/Singapore">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Singapore</option>
+        <option value="Asia/Taipei">(GMT/UTC + 08:00)&nbsp;&nbsp;&nbsp;&nbsp;Asia/Taipei</option>
+        ...
+        <option value="America/New_York">(GMT/UTC − 05:00)&nbsp;&nbsp;&nbsp;&nbsp;America/New York</option>
+        ...
     </select>
 ```
 
@@ -104,7 +111,7 @@ Which gives us:
 
 Say you want the option groups but only a couple regions...
 
-```php
+``` php
 Timezones::create('timezone',null,
                     ['attr'=>['class'=>'form-control'],
                     'with_regions'=>true,
@@ -114,7 +121,7 @@ Timezones::create('timezone',null,
 
 This will return a string similar to the following:
 
-```html
+``` html
     <select name="timezone" class="form-control">
         <optgroup label="Africa">
             <option value="Africa/Addis_Ababa">(GMT/UTC + 03:00)&nbsp;&nbsp;&nbsp;&nbsp;Addis Ababa</option>
@@ -139,28 +146,28 @@ You can also render timezone list as an array. To do so, just use the `Timezones
 
 Example in Laravel:
 
-```php
+``` php
 $timezone_list = Timezones::toArray();
 ```
 
 ### 3. Utility methods
 
-The package includes two methods that make it easy to deal with displaying and storing timezones, `convertFromUTC()` and `convertToUTC()`:
+The package includes two methods that make it easy to deal with displaying and storing timezones, `convertFromUTC()` and `convertToUTC()` :
 
 Each function accepts two required parameters and a third optional parameter dealing with the format of the returned timestamp.
 
-```php
+``` php
     Timezones::convertFromUTC($timestamp, $timezone, $format);
     Timezones::convertToUTC($timestamp, $timezone, $format);
 ```
 
 The first parameter accepts a timestamp, the second accepts the name of the timezone that you are converting to/from. The option values associated with the timezones included in the select form builder can be plugged into here as is. Alternatively, you can use any of [PHP's supported timezones](http://php.net/manual/en/timezones.php).
 
-The third parameter is optional, and default is set to `'Y-m-d H:i:s'`, which is how Laravel natively stores datetimes into the database (the `created_at` and `updated_at` columns). If you're using this for display purposes, you may find including `'(e)'` in the format string which displays the timezone.
+The third parameter is optional, and default is set to `'Y-m-d H:i:s'` , which is how Laravel natively stores datetimes into the database (the `created_at` and `updated_at` columns). If you're using this for display purposes, you may find including `'(e)'` in the format string which displays the timezone.
 
 ## Thanks to
 
 This is based off some lovely work by:
 
-- https://github.com/JackieDo/Timezone-List
-- https://github.com/camroncade/timezone
+* https://github.com/JackieDo/Timezone-List
+* https://github.com/camroncade/timezone
