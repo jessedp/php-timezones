@@ -170,3 +170,5 @@ This is based off some lovely work by:
 
 * https://github.com/JackieDo/Timezone-List
 * https://github.com/camroncade/timezone
+
+The [Spatie group](https://github.com/spatie) and specifically the [laravel-analytics](https://github.com/spatie/laravel-analytics/) project I used ~~as inspiration~~ copied for structure
