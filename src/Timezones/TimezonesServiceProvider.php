@@ -33,7 +33,7 @@ class TimezonesServiceProvider extends ServiceProvider
         //     return new Timezones;
         // });
 
-        $this->app->bind(Timezones::class, function () {
+        $this->app->bind(Timezones::class, function() {
             return new Timezones;
             // $loader = AliasLoader::getInstance();
             // $loader->alias('Timezones', 'jessedp\Timezones\Facades\Timezones');
