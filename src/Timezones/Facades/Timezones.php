@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Timezones facade.
  *
- * @package jessedp\Timezones\Facades
  * @author jessedp <jessedp@gmail.com>
  */
 class Timezones extends Facade

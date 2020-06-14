@@ -8,18 +8,17 @@ use DateTimeZone;
 /**
  * The Timezones class.
  *
- * @package jessedp\Timezones
  * @author jessedp <jessedp@gmail.com>
  */
 class Timezones
 {
     /**
-     * Whitespace seperate
+     * Whitespace seperate.
      */
     const WHITESPACE_SEP = '&nbsp;&nbsp;&nbsp;&nbsp;';
 
     /**
-     * Popular timezones
+     * Popular timezones.
      *
      * @var array
      */
@@ -29,7 +28,7 @@ class Timezones
     ];
 
     /**
-     * The supported regions
+     * The supported regions.
      *
      * @var array
      */
@@ -43,11 +42,11 @@ class Timezones
         'Australia'  => DateTimeZone::AUSTRALIA,
         'Europe'     => DateTimeZone::EUROPE,
         'Indian'     => DateTimeZone::INDIAN,
-        'Pacific'    => DateTimeZone::PACIFIC
+        'Pacific'    => DateTimeZone::PACIFIC,
     ];
 
     /**
-     * Format to display timezones
+     * Format to display timezones.
      *
      * @param  string $timezone
      * @param  string $region
@@ -60,27 +59,28 @@ class Timezones
         $str_offset = $time->format('P');
 
         //clean up the html display
-        $signs = ['-','+'];
-        $signs_r = [' &minus; ',' &plus; '];
-        $offset = str_replace( $signs, $signs_r, $str_offset);
+        $signs = ['-', '+'];
+        $signs_r = [' &minus; ', ' &plus; '];
+        $offset = str_replace($signs, $signs_r, $str_offset);
 
         //do this for sorting later...
-        $dbl_offset = (double)str_replace(':','.', $str_offset);
+        $dbl_offset = (float) str_replace(':', '.', $str_offset);
 
         //only strip things if we're bothering with regions
-        if (!empty($region)) {
+        if (! empty($region)) {
             $timezone = substr($timezone, strlen($region) + 1);
         }
 
         $timezone = str_replace('St_', 'St. ', $timezone);
         $timezone = str_replace('_', ' ', $timezone);
 
-        $formatted = '(GMT/UTC' . $offset . ')' . self::WHITESPACE_SEP . $timezone;
+        $formatted = '(GMT/UTC'.$offset.')'.self::WHITESPACE_SEP.$timezone;
+
         return ['offset'=>$dbl_offset, 'label' => $formatted];
     }
 
     /**
-     * Create a timezone HTML select element for form
+     * Create a timezone HTML select element for form.
      *
      * @param string $name the name/id to be used for the element
      * @param string $selected selected option, defaults to UTC
@@ -91,7 +91,7 @@ class Timezones
      *                                    Arctic, Asia, Atlantic, Australia, Europe, Indian, Pacific
      * @return string
      **/
-    public static function create($name, $selected='UTC', $opts=[])
+    public static function create($name, $selected = 'UTC', $opts = [])
     {
         //handle a null selected
         if (empty($selected)) {
@@ -100,33 +100,33 @@ class Timezones
 
         // Attributes for select element
         $attrSet = '';
-        if (isset($opts['attr']) && is_array($opts['attr']) && !empty($opts['attr'])){
+        if (isset($opts['attr']) && is_array($opts['attr']) && ! empty($opts['attr'])) {
             $attr = $opts['attr'];
 
             foreach ($attr as $attr_name => $attr_value) {
-                $attrSet .= ' ' .$attr_name. '="' .$attr_value. '"';
+                $attrSet .= ' '.$attr_name.'="'.$attr_value.'"';
             }
         }
 
         //setup grouping
         $with_regions = false;
-        if (isset($opts['with_regions']) && is_bool($opts['with_regions']) && $opts['with_regions']){
+        if (isset($opts['with_regions']) && is_bool($opts['with_regions']) && $opts['with_regions']) {
             $with_regions = true;
         }
 
         $limit_regions = [];
         //setup specfic regions - could be better and validate them here too, but, eh...
-        if(isset($opts['regions']) && is_array($opts['regions']) && !empty($opts['regions'])){
+        if (isset($opts['regions']) && is_array($opts['regions']) && ! empty($opts['regions'])) {
             $limit_regions = $opts['regions'];
         }
 
         // start select element
-        $listbox = '<select name="' .$name. '"' .$attrSet. '>';
+        $listbox = '<select name="'.$name.'"'.$attrSet.'>';
 
         if ($with_regions) {
             $regions = self::$regions;
-        } elseif(!empty($limit_regions)){
-            foreach($limit_regions as $region){
+        } elseif (! empty($limit_regions)) {
+            foreach ($limit_regions as $region) {
                 $regions[$region] = self::$regions[$region];
             }
         } else {
@@ -140,7 +140,7 @@ class Timezones
 
             if ($with_regions) {
                 // start optgroup tag
-                $listbox .= '<optgroup label="' . $continent . '">';
+                $listbox .= '<optgroup label="'.$continent.'">';
             } else {
                 //when including everything, don't let formatTimeZone truncate the label.
                 $continent = null;
@@ -162,8 +162,8 @@ class Timezones
                             $labels, SORT_ASC, $opts
                             );
 
-            foreach($opts as $opt){
-                $listbox .= '<option value="' . $opt['tz'] . '"' . $opt['selected'] . '>';
+            foreach ($opts as $opt) {
+                $listbox .= '<option value="'.$opt['tz'].'"'.$opt['selected'].'>';
                 $listbox .= $opt['label'];
                 $listbox .= '</option>';
             }
@@ -180,7 +180,7 @@ class Timezones
     }
 
     /**
-     * Create a timezone array
+     * Create a timezone array.
      *
      * @return mixed
      **/
@@ -204,9 +204,8 @@ class Timezones
         return $list;
     }
 
-
     /**
-     * @param integer $timestamp
+     * @param int $timestamp
      * @param string $timezone
      * @param string $format
      *
@@ -217,7 +216,7 @@ class Timezones
         $date = new DateTime($timestamp, new DateTimeZone('UTC'));
 
         $list = DateTimeZone::listIdentifiers();
-        if (!in_array($timezone, $list)){
+        if (! in_array($timezone, $list)) {
             $timezone = 'UTC';
         }
         $date->setTimezone(new DateTimeZone($timezone));
@@ -226,8 +225,8 @@ class Timezones
     }
 
     /**
-     * Convert a timestamp to UTC
-     * @param integer $timestamp
+     * Convert a timestamp to UTC.
+     * @param int $timestamp
      * @param string $timezone
      * @param string $format
      *
@@ -236,7 +235,7 @@ class Timezones
     public static function convertToUTC($timestamp, $timezone, $format = 'Y-m-d H:i:s')
     {
         $list = DateTimeZone::listIdentifiers();
-        if (!in_array($timezone, $list)) {
+        if (! in_array($timezone, $list)) {
             $timezone = 'UTC';
         }
 
