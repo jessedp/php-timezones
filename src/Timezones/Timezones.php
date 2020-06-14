@@ -23,7 +23,7 @@ class Timezones
      *
      * @var array
      */
-    protected $popularTimezones = [
+    public static $popularTimezones = [
         'GMT' => 'GMT timezone',
         'UTC' => 'UTC timezone',
     ];
@@ -33,7 +33,7 @@ class Timezones
      *
      * @var array
      */
-    protected $regions = [
+    public static $regions = [
         'Africa'     => DateTimeZone::AFRICA,
         'America'    => DateTimeZone::AMERICA,
         'Antarctica' => DateTimeZone::ANTARCTICA,
@@ -54,7 +54,7 @@ class Timezones
      *
      * @return array
      */
-    protected function formatTimezone($timezone, $region)
+    public static function formatTimezone($timezone, $region)
     {
         $time = new DateTime(null, new DateTimeZone($timezone));
         $str_offset = $time->format('P');
@@ -88,10 +88,10 @@ class Timezones
      *      @subparam array $attr key=>value pairs of attributes to apply to the select element
      *      @subparam bool $with_regions whether or not to do region grouping (default=false)
      *      @subparam array $regions the regions to include, one or more of: Africa, America, Antarctica,
-*                                    Arctic, Asia, Atlantic, Australia, Europe, Indian, Pacific
- * @return string
+     *                                    Arctic, Asia, Atlantic, Australia, Europe, Indian, Pacific
+     * @return string
      **/
-    public function create($name, $selected='UTC', $opts=[])
+    public static function create($name, $selected='UTC', $opts=[])
     {
         //handle a null selected
         if (empty($selected)) {
@@ -124,10 +124,10 @@ class Timezones
         $listbox = '<select name="' .$name. '"' .$attrSet. '>';
 
         if ($with_regions) {
-            $regions = $this->regions;
+            $regions = self::$regions;
         } elseif(!empty($limit_regions)){
             foreach($limit_regions as $region){
-                $regions[$region] = $this->regions[$region];
+                $regions[$region] = self::$regions[$region];
             }
         } else {
             $regions = ['All'=>DateTimeZone::ALL];
@@ -150,7 +150,7 @@ class Timezones
             $offsets = [];
             $labels = [];
             foreach ($timezones as $timezone) {
-                $opt = $this->formatTimezone($timezone, $continent);
+                $opt = self::formatTimezone($timezone, $continent);
                 $opt['tz'] = $timezone;
                 $opt['selected'] = ($selected == $timezone) ? ' selected="selected"' : '';
                 $offsets[$timezone] = $opt['offset'];
@@ -184,20 +184,20 @@ class Timezones
      *
      * @return mixed
      **/
-    public function toArray()
+    public static function toArray()
     {
         $list = [];
 
         // Add popular timezones to list
-        foreach ($this->popularTimezones as $key => $value) {
+        foreach (self::$popularTimezones as $key => $value) {
             $list['General'][$key] = $value;
         }
 
         // Add all timezone of the regions to return
-        foreach ($this->continents as $continent => $mask) {
+        foreach (self::$regions as $continent => $mask) {
             $timezones = DateTimeZone::listIdentifiers($mask);
             foreach ($timezones as $timezone) {
-                $list[$continent][$timezone] = $this->formatTimezone($timezone, $continent);
+                $list[$continent][$timezone] = self::formatTimezone($timezone, $continent);
             }
         }
 
