@@ -55,7 +55,7 @@ class Timezones
      */
     public static function formatTimezone($timezone, $region)
     {
-        $time = new DateTime(null, new DateTimeZone($timezone));
+        $time = new DateTime('now', new DateTimeZone($timezone));
         $str_offset = $time->format('P');
 
         //clean up the html display
